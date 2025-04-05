@@ -1,0 +1,16 @@
+services:
+  mysql-teste:
+    image: mysql:8.0
+    container_name: mysql-api-stock
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: stock123
+      MYSQL_DATABASE: db_stock
+      MYSQL_PASSWORD: stock123
+    ports:
+      - "${PORT_DATABASE:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
