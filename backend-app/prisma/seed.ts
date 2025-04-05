@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
@@ -17,6 +18,33 @@ async function main() {
     }
 
     console.log('Roles criadas com sucesso!');
+
+    const adminRole = await prisma.role.findUnique({
+        where: { name: 'admin' },
+    });
+
+    const hashedPassword = await bcrypt.hash('admin123', 10);
+
+    await prisma.user.upsert({
+        where: { email: 'admin@admin.com' },
+        update: {},
+        create: {
+            name: 'Administrador',
+            email: 'admin@admin.com',
+            password: hashedPassword,
+            roles: {
+                create: [
+                    {
+                        role: {
+                            connect: { id: adminRole!.id },
+                        },
+                    },
+                ],
+            },
+        },
+    });
+
+    console.log('Usuário admin criado com sucesso!');
 }
 
 main()
