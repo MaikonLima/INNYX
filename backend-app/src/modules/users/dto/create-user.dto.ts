@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, MinLength, MaxLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, MinLength, MaxLength, IsArray, ArrayNotEmpty, IsInt } from 'class-validator';
 
 export class CreateUserDto {
     @ApiProperty({
@@ -27,4 +27,14 @@ export class CreateUserDto {
     @IsNotEmpty({ message: 'A senha é obrigatória.' })
     @MinLength(6, { message: 'A senha deve ter pelo menos 6 caracteres.' })
     password: string;
+
+    @ApiProperty({
+        description: 'Lista de IDs dos papéis (roles) do usuário',
+        example: [1],
+        type: [Number],
+    })
+    @IsArray({ message: 'Roles deve ser uma lista de IDs.' })
+    @ArrayNotEmpty({ message: 'É necessário informar pelo menos um role.' })
+    @IsInt({ each: true, message: 'Cada role deve ser um número inteiro.' })
+    roles: number[];
 }
