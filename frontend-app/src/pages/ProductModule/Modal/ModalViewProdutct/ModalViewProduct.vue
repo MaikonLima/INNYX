@@ -6,16 +6,23 @@
             <div class="flex flex-col lg:grid lg:grid-cols-2 gap-6">
                 <InputTextField id="product_name" name="name" label="Nome" placeholder="Informe o nome do produto"
                     :disabled="true" v-model="dataObject.name" />
-                <InputTextField id="product_description" name="description" label="E-mail"
-                    placeholder="Informe a descrição do produto" :disabled="true" v-model="dataObject.email" />
+                <InputTextField id="product_description" name="description" label="Descrição"
+                    placeholder="Informe a descrição do produto" :disabled="true" v-model="dataObject.description" />
             </div>
 
             <div class="flex flex-col lg:grid lg:grid-cols-2 gap-6 mt-6">
-                <InputTextField id="product_price" name="price" label="Nível de acesso" placeholder="Informe o preço"
-                    :disabled="true" v-model="dataObject.roles[0].id" />
-                <InputTextField id="product_expirationDate" name="expirationDate" label="Data de criação"
+                <InputTextField id="product_price" name="price" label="Preço" placeholder="Informe o preço"
+                    :disabled="true" v-model="dataObject.price" />
+                <InputTextField id="product_expirationDate" name="expirationDate" label="Data de validade"
                     placeholder="Informe a data de validade" :disabled="true"
-                    :model-value="formatDate(dataObject.createdAt)" />
+                    :model-value="formatDate(dataObject.expirationDate)" />
+            </div>
+
+            <div class="flex flex-col lg:grid lg:grid-cols-2 gap-6 mt-6">
+                <InputTextField id="product_name" name="categories" label="Nome da Categoria"
+                    placeholder="Informe o nome da categoria" :disabled="true" v-model="dataObject.category.name" />
+                <InputTextField id="product_description" name="categories" label="Imagem do Produto"
+                    placeholder="Informe o nome da categoria" type="file" :disabled="true" />
             </div>
 
             <template #footer>
@@ -54,7 +61,7 @@ export default defineComponent({
         }
     },
     emits: ["close", "save"],
-    setup() {
+    setup(props, { emit }) {
 
         const formatDate = (dataObject: any) => {
             return dayjs(dataObject).format("DD/MM/YYYY");

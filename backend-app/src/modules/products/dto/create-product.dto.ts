@@ -13,11 +13,11 @@ import { IsFutureDate } from '../validators/is-future-date.validator';
 export class CreateProductDto {
   @ApiProperty({
     description: 'Nome do produto',
-    maxLength: 50,
+    maxLength: 200,
     example: 'Smartphone Galaxy S23',
   })
   @IsNotEmpty()
-  @MaxLength(50)
+  @MaxLength(200)
   name: string;
 
   @ApiProperty({
@@ -38,17 +38,17 @@ export class CreateProductDto {
 
   @ApiProperty({
     description: 'Data de validade (deve ser futura)',
-    example: '2025-12-31',
+    example: '2025-12-31T00:00:00.000Z',
   })
-  @IsDateString()
   @Validate(IsFutureDate, { message: 'A validade deve ser uma data futura' })
   @Type(() => Date)
   @MinDate(new Date(), { message: 'A validade deve ser uma data futura' })
-  expirationDate: string;
+  expirationDate: Date;
 
   @ApiProperty({
-    description: 'Nome único da imagem associada',
-    example: 's23-2025-01-01.png',
+    type: 'string',
+    format: 'binary',
+    required: false,
   })
   @IsNotEmpty()
   imageName: string;

@@ -35,8 +35,7 @@
                         </slot>
                     </td>
                     <td data-label="Ações">
-                        <ActionsButtons :itemId="row.id" @view="viewItem" @edit="editItem" @homologate="homologateItem"
-                            @cancel="cancelItem" />
+                        <ActionsButtons :itemId="row.id" @view="viewItem" @edit="editItem" @excluir="cancelItem" />
                     </td>
                 </tr>
             </tbody>
@@ -147,16 +146,8 @@ export default defineComponent({
             emit("edit", itemId);
         };
 
-        const homologateItem = (itemId: string) => {
-            emit("homologate", itemId);
-        };
-
         const cancelItem = (itemId: string) => {
             emit("cancel", itemId);
-        };
-
-        const viewFile = (itemId: string) => {
-            emit("viewFile", itemId);
         };
 
         return {
@@ -169,9 +160,7 @@ export default defineComponent({
             previousPage,
             viewItem,
             editItem,
-            homologateItem,
             cancelItem,
-            viewFile,
         };
     },
 });
@@ -210,6 +199,7 @@ export default defineComponent({
 .bg-color-paginator {
     background-color: #10B981;
 }
+
 .bg-color-paginator:disabled {
     background-color: #e5e7eb;
 }

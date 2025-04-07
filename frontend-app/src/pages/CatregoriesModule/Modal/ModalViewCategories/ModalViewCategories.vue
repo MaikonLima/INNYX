@@ -3,19 +3,9 @@
         <DialogDefaultComponent header="Cadastro de Produtos" :visible="visible" modal closable
             @update:visible="$emit('close')" width="90%">
 
-            <div class="flex flex-col lg:grid lg:grid-cols-2 gap-6">
+            <div class="flex flex-col gap-6">
                 <InputTextField id="product_name" name="name" label="Nome" placeholder="Informe o nome do produto"
                     :disabled="true" v-model="dataObject.name" />
-                <InputTextField id="product_description" name="description" label="E-mail"
-                    placeholder="Informe a descrição do produto" :disabled="true" v-model="dataObject.email" />
-            </div>
-
-            <div class="flex flex-col lg:grid lg:grid-cols-2 gap-6 mt-6">
-                <InputTextField id="product_price" name="price" label="Nível de acesso" placeholder="Informe o preço"
-                    :disabled="true" v-model="dataObject.roles[0].id" />
-                <InputTextField id="product_expirationDate" name="expirationDate" label="Data de criação"
-                    placeholder="Informe a data de validade" :disabled="true"
-                    :model-value="formatDate(dataObject.createdAt)" />
             </div>
 
             <template #footer>
@@ -54,7 +44,7 @@ export default defineComponent({
         }
     },
     emits: ["close", "save"],
-    setup() {
+    setup(props, { emit }) {
 
         const formatDate = (dataObject: any) => {
             return dayjs(dataObject).format("DD/MM/YYYY");

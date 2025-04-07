@@ -1,7 +1,7 @@
 <template>
     <div v-if="isLoading" class="loading-overlay">
-        <div class="loading-content">
-            <img src="@/assets/icons/stock-icon.png" alt="Loading Image" />
+        <div class="loading-content flex flex-col items-center">
+            <img src="@/assets/icons/stock-icon.png" alt="Loading Image" class="w-20" />
             <div class="loader"></div>
         </div>
     </div>

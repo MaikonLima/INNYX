@@ -36,9 +36,9 @@ model Permission {
 
 model UserRole {
   id      Int   @id @default(autoincrement())
-  user    User  @relation(fields: [userId], references: [id])
+  user    User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  Int
-  role    Role  @relation(fields: [roleId], references: [id])
+  role    Role  @relation(fields: [roleId], references: [id], onDelete: Cascade)
   roleId  Int
 
   @@unique([userId, roleId])

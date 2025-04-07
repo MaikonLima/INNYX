@@ -1,16 +1,16 @@
 <template>
     <div>
         <DialogDefaultComponent header="Cadastro de Categoria" :visible="visible" modal closable
-            @update:visible="$emit('close')" width="60%" height="30%">
+            @update:visible="$emit('close')" width="60%">
 
             <div class="flex flex-row">
                 <InputTextField id="categories_name" name="categories" label="Nome da Categoria"
-                    placeholder="Informe o nome da categoria" />
+                    placeholder="Informe o nome da categoria" v-model="storeCategories.name" />
             </div>
 
             <template #footer>
                 <ButtonComponent label="Cancelar" outlined @click="$emit('close')" />
-                <ButtonComponent label="Salvar" @click="$emit('save')" />
+                <ButtonComponent label="Enviar" @click="$emit('save')" />
             </template>
 
             <template #closeicon="{ class: closeIconClass }">
@@ -25,6 +25,7 @@ import { defineComponent } from 'vue';
 import DialogDefaultComponent from '../../../../components/DialogComponent/DialogDefaultComponent.vue';
 import ButtonComponent from '../../../../components/ButtonComponent/ButtonComponent.vue';
 import InputTextField from '../../../../components/InputComponent/InputTextFieldComponent/InputTextField.vue';
+import { useCategoriestore } from '../../../../store/categoryStore';
 
 export default defineComponent({
     name: "ModalCreateCategories",
@@ -40,6 +41,12 @@ export default defineComponent({
         },
     },
     emits: ["close", "save"],
+    setup() {
+        const storeCategories = useCategoriestore();
+        return {
+            storeCategories
+        }
+    }
 })
 
 </script>

@@ -1,21 +1,21 @@
-import ApiStock from "../Api/ApiStock"
+import ApiStock from "../Api/ApiStock";
 
 export const createProducts = async (data: any) => {
-    return ApiStock.post("products", data)
-}
+  return ApiStock.post("products", data);
+};
 
-export const getAllProducts = async () => {
-    return ApiStock.get("products")
-}
+export const Products = async (limit = 10, page = 1) => {
+  return ApiStock.get(`products?limit=${limit}&page=${page}`);
+};
 
 export const getProductById = async (id: number | null) => {
-    return ApiStock.get(`products/${id}`)
-}
+  return ApiStock.get(`products/${id}`);
+};
 
 export const updateProduct = async () => {
-    return ApiStock.put(`products/${1}`)
-}
+  return ApiStock.put(`products/${1}`);
+};
 
 export const removeProduct = async (id: number | null) => {
-    return ApiStock.delete(`products/${id}`)
-}
+  return ApiStock.delete(`products/${id}`);
+};

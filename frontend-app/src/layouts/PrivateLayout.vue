@@ -1,7 +1,7 @@
 <template>
     <div>
         <NavBarComponent />
-        <div class="pt-30">
+        <div class="pt-20">
             <router-view />
         </div>
     </div>

@@ -1,18 +1,21 @@
 <template>
     <nav class="p-4 flex items-center justify-between fixed w-full h-20 z-10">
         <div class="flex items-center space-x-2 gap-4">
-            <a href="/">
-                <img src="@/assets/icons/stock-icon.png" alt="Icon" class="w-16" />
-            </a>
-            <span class="text-2xl lg:text-3xl font-bold text-amber-50">Gerenciamento de Estoque</span>
-        </div>
-
-        <div class="relative flex gap-4 lg:mr-8">
             <button class="gray-700 focus:outline-none cursor-pointer" @click="toggleMenuUser"
                 aria-controls="overlay_menu">
                 <img src="@/assets/icons/menu.svg" class="h-8 w-8" />
             </button>
-            <button class="gray-700 focus:outline-none cursor-pointer" @click="() => {}">
+            <a href="/">
+                <img src="@/assets/icons/stock-icon.png" alt="Icon" class="h-12 w-12" />
+            </a>
+            <!-- <span class="text-2xl lg:text-3xl font-bold text-amber-50">Gerenciamento de Estoque</span> -->
+
+            <span class="text-2xl lg:text-3xl font-bold text-amber-50"></span>
+        </div>
+
+        <div class="relative flex gap-4 lg:mr-8">
+
+            <button class="gray-700 focus:outline-none cursor-pointer" @click="() => { }">
                 <img src="@/assets/icons/user.svg" class="h-8 w-8" />
             </button>
         </div>
@@ -155,7 +158,7 @@ nav {
 .bg-button-close {
     color: white !important;
     border-color: white !important;
-    
+
 }
 
 .bg-button-close:hover {
