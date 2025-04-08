@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, type PropType } from 'vue';
 import Textarea from 'primevue/textarea';
 
 export default defineComponent({
@@ -37,7 +37,7 @@ export default defineComponent({
             default: false,
         },
         size: {
-            type: String as PropType<'small' | 'large' | null>,
+            type: String,
             default: null,
             validator: (value: string) => ['small', 'large', null].includes(value),
         },

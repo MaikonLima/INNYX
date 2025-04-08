@@ -8,16 +8,7 @@
             <a href="/">
                 <img src="@/assets/icons/stock-icon.png" alt="Icon" class="h-12 w-12" />
             </a>
-            <!-- <span class="text-2xl lg:text-3xl font-bold text-amber-50">Gerenciamento de Estoque</span> -->
-
-            <span class="text-2xl lg:text-3xl font-bold text-amber-50"></span>
-        </div>
-
-        <div class="relative flex gap-4 lg:mr-8">
-
-            <button class="gray-700 focus:outline-none cursor-pointer" @click="() => { }">
-                <img src="@/assets/icons/user.svg" class="h-8 w-8" />
-            </button>
+            <span class="text-2xl lg:text-3xl font-bold text-amber-50">Gerenciamento de Estoque</span>
         </div>
 
         <Drawer :visible="isVisible" @update:visible="isVisible = $event" class="bg-color-drawer">
@@ -65,14 +56,27 @@
                     </div>
                     <div class="mt-auto">
                         <hr class="mb-4 mx-4 border-t border-0 border-surface-200 dark:border-surface-700" />
-                        <a v-ripple
-                            class="m-4 flex items-center cursor-pointer p-4 gap-2 rounded text-surface-700 hover:bg-surface-100 dark:text-surface-0 dark:hover:bg-surface-800 duration-150 transition-colors p-ripple">
+                        <a v-ripple class="
+                            m-4 flex 
+                            items-center 
+                            cursor-pointer 
+                            p-4 gap-2 
+                            rounded 
+                            text-surface-700 
+                            hover:bg-surface-100 
+                            dark:text-surface-0 
+                            dark:hover:bg-surface-800 
+                            duration-150 
+                            transition-colors 
+                            p-ripple" @click="openLogoutModal">
                             <Avatar image="/images/avatar/amyelsner.png" shape="circle" />
-                            <span class="font-bold">Amy Elsner</span>
+                            <span class="font-bold">Sair</span>
                         </a>
                     </div>
                 </div>
             </template>
+
+            <Toast />
         </Drawer>
     </nav>
 </template>
@@ -80,24 +84,8 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import DrawerComponent from '../DrawerComponent/DrawerComponent.vue';
-import { Avatar } from 'primevue';
-
-interface User {
-    nome_completo: string;
-    matricula: string;
-    email: string;
-    cargo: {
-        descricao: string;
-    };
-    nivel_de_acesso: {
-        descricao: string;
-    };
-    User_Sistema: Array<{
-        sistema: {
-            descricao: string;
-        };
-    }>;
-}
+import { Toast, useConfirm, useToast } from 'primevue';
+import router from '../../routes';
 
 export default defineComponent({
     components: {
@@ -106,6 +94,9 @@ export default defineComponent({
     setup() {
         const showMenu = ref(false);
         const isVisible = ref(false);
+        const confirm = useConfirm();
+        const toast = useToast();
+
         const options: any[] = [
             {
                 label: "Produtos",
@@ -125,14 +116,43 @@ export default defineComponent({
         ];
 
         const logout = () => {
-            document.cookie = 'auth._token.local=false';
-            document.cookie = 'auth._token_expiration.local=false';
-            window.location.replace('http://localhost:5173/login');
+            localStorage.removeItem("token");
+            localStorage.removeItem("refresh_token");
+            router.push('/login');
         };
 
         const toggleMenuUser = () => {
             isVisible.value = !isVisible.value;
         };
+
+        const openLogoutModal = async () => {
+            confirm.require({
+                message: 'Você deseja sair do sistema?',
+                header: 'Logout',
+                icon: 'pi pi-info-circle',
+                rejectLabel: 'Cancel',
+                rejectProps: {
+                    label: 'Não',
+                    severity: 'secondary',
+                    outlined: true
+                },
+                acceptProps: {
+                    label: 'Sim',
+                    severity: 'primary'
+                },
+                accept: () => {
+                    toast.add({ severity: 'success', summary: 'Confirmado', detail: 'Você foi desconectado do sistema!', life: 3000 });
+                    setTimeout(() => {
+                        logout();
+                    }, 1000)
+                },
+                reject: () => {
+
+                }
+            });
+        };
+
+
 
         return {
             showMenu,
@@ -140,6 +160,7 @@ export default defineComponent({
             options,
             logout,
             toggleMenuUser,
+            openLogoutModal
         };
     },
 });

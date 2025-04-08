@@ -21,7 +21,7 @@ export default defineComponent({
     name: 'ActionsButtons',
     props: {
         itemId: {
-            type: Number,
+            type: String,
             required: true,
         },
         showEdit: {

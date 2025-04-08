@@ -10,5 +10,11 @@ export const useLoginStore = defineStore("login", {
       this.user = payload.data;
       this.token = payload.token;
     },
+    logout() {
+      this.user = null;
+      this.token = null;
+      localStorage.removeItem("token");
+      localStorage.removeItem("refresh_token");
+    }
   },
 });

@@ -1,7 +1,7 @@
 <template>
     <Button class="custom-roudend-button" :is="as" :class="buttonClasses" :style="style" @click="$emit('click')">
         <template v-if="loading && loadingIcon">
-            <span :class="['p-button-loading-icon', loadingIconClass]"></span>
+            <span :class="['p-button-loading-icon', loadingIcon]"></span>
         </template>
 
         <template v-if="icon && !loading">
@@ -23,19 +23,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, type PropType } from 'vue';
 
 export default defineComponent({
     name: 'ButtonComponent',
     props: {
         style: { type: Object as () => Record<string, any> | null, default: null },
-        class: { type: [String, Array, Object] as () => string | Array<any> | Record<string, any> | null, default: null },
+        class: [String, Array, Object] as unknown as PropType<string | Array<any> | Record<string, any>>,
         label: { type: String, default: null },
         icon: { type: String, default: null },
         iconPos: { type: String as () => 'left' | 'right', default: 'left' },
-        iconClass: { type: [String, Object] as () => string | Record<string, any> | null, default: null },
+        iconClass: [String, Array, Object] as unknown as PropType<string | Array<any> | Record<string, any>>,
         badge: { type: String, default: null },
-        badgeClass: { type: [String, Object] as () => string | Record<string, any> | null, default: null },
+        badgeClass: [String, Array, Object] as unknown as PropType<string | Array<any> | Record<string, any>>,
         badgeSeverity: { type: String, default: null },
         loading: { type: Boolean, default: false },
         loadingIcon: { type: String, default: null },

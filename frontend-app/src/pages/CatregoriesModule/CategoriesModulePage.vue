@@ -128,7 +128,7 @@ const handlerSaveCategory = async () => {
         toast.add({
             severity: "error",
             summary: "Error",
-            detail: `${error.response.data.message}`,
+            detail: `${error}`,
             life: 5000,
         });
         isLoading.value = false;

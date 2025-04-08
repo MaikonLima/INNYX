@@ -3,3 +3,13 @@ export type ICategory = {
   name: string;
   products: [];
 };
+
+
+export type JwtPayload = {
+  sub: number;
+  email: string;
+  roles: string[];
+  name: string;
+  iat: number;
+  exp: number;
+}

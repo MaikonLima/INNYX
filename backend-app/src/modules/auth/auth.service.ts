@@ -22,6 +22,7 @@ export class AuthService {
       user.id,
       user.email,
       user.roles.map((r) => r.role.name),
+      user.name
     );
     await this.usersService.updateRefreshToken(user.id, tokens.refresh_token);
 
@@ -31,8 +32,8 @@ export class AuthService {
     };
   }
 
-  async generateTokens(userId: number, email: string, roles: any) {
-    const payload = { sub: userId, email, roles };
+  async generateTokens(userId: number, email: string, roles: string[], name: string) {
+    const payload = { sub: userId, email, roles, name };
 
     const [access_token, refresh_token] = await Promise.all([
       this.jwtService.signAsync(payload, {
@@ -61,6 +62,7 @@ export class AuthService {
       user.id,
       user.email,
       user.roles.map((r) => r.role.name),
+      user.name
     );
     await this.usersService.updateRefreshToken(user.id, tokens.refresh_token);
 

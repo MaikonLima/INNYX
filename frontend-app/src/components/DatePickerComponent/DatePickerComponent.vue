@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, watch } from 'vue';
+import { defineComponent, ref, watch, type PropType } from 'vue';
 import DatePicker from 'primevue/datepicker';
 
 type DateSelectionMode = 'single' | 'multiple' | 'range';
@@ -67,11 +67,11 @@ export default defineComponent({
             default: 1,
         },
         minDate: {
-            type: Date as PropType<Date | null>,
+            type: Date,
             default: null,
         },
         maxDate: {
-            type: Date as PropType<Date | null>,
+            type: Date,
             default: null,
         },
         disabledDates: {
@@ -117,11 +117,11 @@ export default defineComponent({
                 selectedDate.value = newValue;
             }
         );
-
+        
+        // @ts-ignore
         const onDateChange = (value: Date | Date[] | null) => {
             emit('update:modelValue', value);
         };
-
         const onDateSelect = (value: Date | Date[] | null) => {
             emit('date-select', value);
         };

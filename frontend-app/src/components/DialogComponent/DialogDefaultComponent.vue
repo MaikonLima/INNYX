@@ -40,8 +40,14 @@ export default defineComponent({
     footer: { type: String, default: null },
     visible: { type: Boolean, default: false },
     modal: { type: Boolean, default: false },
-    contentStyle: { type: [String, Object] as () => string | Record<string, any> | null, default: null },
-    contentClass: { type: [String, Object] as () => string | Record<string, any> | null, default: null },
+    contentStyle: {
+      type: [String, Object],
+      default: null
+    },
+    contentClass: {
+      type: [String, Object],
+      default: null
+    },
     contentProps: { type: Object as () => Record<string, any> | null, default: null },
     closable: { type: Boolean, default: true },
     dismissableMask: { type: Boolean, default: false },
@@ -62,8 +68,11 @@ export default defineComponent({
     keepInViewPort: { type: Boolean, default: true },
     minX: { type: Number, default: 0 },
     minY: { type: Number, default: 0 },
-    appendTo: { type: [String, Object] as () => string | Record<string, any>, default: 'body' },
-    style: { type: [String, Object] as () => string | Record<string, any> | null, default: null },
+    appendTo: {
+      type: [String, Object],
+      default: 'body'
+    },
+    style: { type: [String, Object], default: null },
     closeIcon: { type: String, default: null },
     maximizeIcon: { type: String, default: null },
     minimizeIcon: { type: String, default: null },
@@ -87,7 +96,7 @@ export default defineComponent({
   ],
   setup(props) {
     const dialogStyle = computed(() => ({
-      ...props.style,
+      ...(props.style || {}),
       width: props.width,
       height: props.height,
     }));

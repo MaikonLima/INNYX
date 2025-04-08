@@ -1,6 +1,6 @@
 <template>
     <div>
-        <DialogDefaultComponent header="Cadastro de Produtos" :visible="visible" modal closable
+        <DialogDefaultComponent header="Visualização de Usuários" :visible="visible" modal closable
             @update:visible="$emit('close')" width="90%">
 
             <div class="flex flex-col lg:grid lg:grid-cols-2 gap-6">
